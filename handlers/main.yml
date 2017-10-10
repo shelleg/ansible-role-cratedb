@@ -1,17 +1,17 @@
 ---
 # handlers file for ansible-role-cratedb
 
-- name: restart cratedb
+- name: restart crate
   service:
-    name: cratedb
+    name: crate
     state: restarted
 
-- name: reload cratedb
+- name: reload crate
   service:
-    name: cratedb
+    name: crate
     state: reloaded
 
-- name: stop cratedb
+- name: stop crate
   service:
-    name: cratedb
+    name: crate
     state: stopped
