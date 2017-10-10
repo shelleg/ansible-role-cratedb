@@ -1,0 +1,18 @@
+---
+
+- name: "Add GPG key from cratedb"
+  rpm_key:
+    state: present
+    key: "https://cdn.crate.io/downloads/yum/RPM-GPG-KEY-crate"
+
+- name: "Install crate-release rpm"
+  yum:
+    name: "https://cdn.crate.io/downloads/yum/7/noarch/crate-release-7.0-1.noarch.rpm"
+    state: present
+
+- name: "Install crate from testing repo"
+  yum:
+    name: crate
+    enablerepo: crate-testing
+    state: latest
+  when: cratedb_adapter_testing

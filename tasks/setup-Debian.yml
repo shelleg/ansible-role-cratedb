@@ -1,0 +1,24 @@
+---
+
+- name: "Add apt-key for create"
+  apt_key:
+    url: "https://cdn.crate.io/downloads/apt/DEB-GPG-KEY-crate"
+    state: present
+
+- name: "Add stable repo when cratedb_adapter_testing is: {{ cratedb_adapter_testing }}"
+  apt_repository:
+    repo: "deb https://cdn.crate.io/downloads/apt/stable/ jessie {{ ansible_distribution_release }} main"
+    state: present
+  when: not cratedb_adapter_testing
+
+- name: "Add testing repo when cratedb_adapter_testing is: {{ cratedb_adapter_testing }}"
+  apt_repository:
+    repo: "deb https://cdn.crate.io/downloads/apt/testing/ jessie {{ ansible_distribution_release }} main"
+    state: present
+  when: cratedb_adapter_testing
+
+- name: "Install crate from testing repository"
+  apt:
+    name: crate
+    state: latest
+  when: cratedb_adapter_testing

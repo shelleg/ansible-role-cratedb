@@ -1,0 +1,66 @@
+---
+# tasks file for ansible-role-cratedb
+- name: "Inlcude OS-specific vars"
+  include_vars: "{{ ansible_os_family }}.yml"
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
+
+- name: "Create crate group"
+  group:
+    name: "{{ cratedb_group }}"
+    state: present
+
+- name: "Create crate user"
+  user:
+    name: "{{ cratedb_user }}"
+    state: present
+    system: True
+
+- name: "Create / Update crate directories"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ cratedb_user }}"
+    group: "{{ cratedb_group}}"
+  with_items:
+    - /opt/crate
+    - /opt/crate/data
+    - /opt/crate/data/crate
+
+- name: "Inlcude OS-specific tasks"
+  include: "setup-{{ ansible_os_family }}.yml"
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
+
+- name: "Install crate packages."
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ crate_packages }}"
+  when: not cratedb_adapter_testing
+
+- name: "Copy crate.yml from template to create config dir"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ cratedb_config_dir }}/{{ item }}"
+    owner: "{{ cratedb_user }}"
+    group: "{{ cratedb_group}}"
+  register: service
+  notify: restart crate
+  with_items:
+    - crate.yml
+
+- name: "Start crate and enable at boot."
+  service:
+    name: crate
+    enabled: true
+    state: started
+
+- name: "Wait until up on listen address {{ cratedb_listen_address }} port tcp {{ cratedb_listen_port }}"
+  wait_for:
+    host: "{{ cratedb_listen_address }}"
+    port: "{{ cratedb_listen_port }}"
+    delay: 10
+
+- name: "prometheus init db - when cratedb_prom_init"
+  include: "prometheus-initdb.yml"
+  when: cratedb_prometheus_init

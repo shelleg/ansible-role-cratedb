@@ -1,0 +1,5 @@
+---
+crate_packages:
+  - epel-release
+  - apt-transport-https
+  - crate

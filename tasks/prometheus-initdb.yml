@@ -1,0 +1,22 @@
+---
+
+- name: "Make sure pip is installed"
+  package:
+    name: python-pip
+    state: latest
+
+- name: "Insall cratedb client named crash"
+  pip:
+    name: crash
+    state: latest
+
+- name: "Create metrics database if not exists ..."
+  shell: >
+        crash -c 'CREATE TABLE IF NOT EXISTS "metrics" (
+          "timestamp" TIMESTAMP,
+          "labels_hash" STRING,
+          "labels" OBJECT(DYNAMIC),
+          "value" DOUBLE,
+          "valueRaw" LONG,
+          PRIMARY KEY ("timestamp", "labels_hash")
+          );'

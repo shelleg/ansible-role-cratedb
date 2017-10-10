@@ -1,0 +1,9 @@
+---
+# defaults file for ansible-role-cratedb
+cratedb_prometheus_init: false
+cratedb_user: crate
+cratedb_group: crate
+cratedb_listen_address: 0.0.0.0
+cratedb_listen_port: 4200
+cratedb_config_dir: /etc/crate/
+cratedb_adapter_testing: false

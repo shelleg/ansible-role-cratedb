@@ -1,0 +1,23 @@
+---
+#- name: centos6
+#  box: geerlingguy/centos6
+#  ram: 512
+#  ip: 172.16.1.101
+
+- name: crate-centos
+  box: centos/7
+  box_version: 1708.01
+  ram: 1024
+  ip: 172.16.1.101
+  ssh_host_port: 2210
+  provider: virtualbox
+  protected: false
+
+- name: crate-ubuntu
+  box: bento/ubuntu-16.04
+  box_version: '2.2.7'
+  ram: 1024
+  ip: 172.16.1.102
+  ssh_host_port: 2214
+  provider: virtualbox
+  protected: false
