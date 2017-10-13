@@ -2,4 +2,3 @@
 crate_packages:
   - apt-transport-https
   - python-pip
-  - crate
