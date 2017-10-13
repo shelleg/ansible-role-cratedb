@@ -10,6 +10,14 @@
     name: "https://cdn.crate.io/downloads/yum/7/noarch/crate-release-7.0-1.noarch.rpm"
     state: present
 
+- name: "Install crate packages."
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ crate_packages }}"
+  when: not cratedb_adapter_testing
+
 - name: "Install crate from testing repo"
   yum:
     name: crate

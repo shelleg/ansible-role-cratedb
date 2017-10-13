@@ -26,16 +26,21 @@
     - /opt/crate/data
     - /opt/crate/data/crate
 
-- name: "Inlcude OS-specific tasks"
-  include: "setup-{{ ansible_os_family }}.yml"
-  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
-
 - name: "Install crate packages."
   package:
     name: "{{ item }}"
     state: present
   with_items:
     - "{{ crate_packages }}"
+
+- name: "Inlcude OS-specific tasks"
+  include: "setup-{{ ansible_os_family }}.yml"
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
+
+- name: "Install crate packages."
+  package:
+    name: "crate"
+    state: present
   when: not cratedb_adapter_testing
 
 - name: "Copy crate.yml from template to create config dir"

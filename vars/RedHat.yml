@@ -2,4 +2,4 @@
 crate_packages:
   - epel-release
   - python2-pip
-  - crate
+  # - crate
