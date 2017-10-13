@@ -1,10 +1,5 @@
 ---
 
-- name: "Make sure pip is installed"
-  package:
-    name: python-pip
-    state: latest
-
 - name: "Insall cratedb client named crash"
   pip:
     name: crash
