@@ -83,11 +83,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
       srv.vm.provision :ansible do |ansible|
            ansible.limit = servers[:name]
+        # control playbook name from servers.yml
         if servers["playbook"] == nil
            ansible.playbook = "./test.yml"
         else
            ansible.playbook = "./#{servers["playbook"]}"
         end
+        # Pass a custom inveneoty file
         if servers["inventory"] != nil
            ansible.inventory_path = servers["inventory"]
         end
@@ -95,9 +97,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             ansible.sudo_user = "root"
             ansible.host_key_checking = "false"
             ansible.verbose = "-v"
-
+            # in case we have requirements for ansible role under
             ansible.galaxy_roles_path = "./site-roles/"
+            # requirements file
             ansible.galaxy_role_file = "./requirements.yml"
+            # extra_vars
             ansible.extra_vars = {
               some_var: "some_value",
               dict: {
