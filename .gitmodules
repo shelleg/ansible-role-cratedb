@@ -1,0 +1,3 @@
+[submodule "tests/roles-test-shim"]
+	path = tests/roles-test-shim
+	url = https://github.com/shelleg/Ansible-Role-Test-Shim.git
