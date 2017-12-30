@@ -1,9 +1,9 @@
 ---
-- hosts: centos,ubuntu
+- hosts: all
   become: true
   roles:
     # - role: shelleg.epel
     #   when: ansible_os_family == 'RedHat'
-    - role: ansible-role-cratedb
+    - role: role_under_test
       cratedb_adapter_testing: true
       cratedb_adapter_prometheus_init: true

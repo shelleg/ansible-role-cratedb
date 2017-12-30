@@ -1,4 +1,11 @@
 ---
+- name: "Install crate requirements packages."
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - "{{ crate_packages }}"
 
 - name: "Add apt-key for create"
   apt_key:

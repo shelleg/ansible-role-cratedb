@@ -1,0 +1,13 @@
+---
+services: docker
+
+env:
+  - distro: centos7
+  - distro: ubuntu1604
+
+script:
+  - chmod +x ./tests/roles-test-shim//ansible-role-test.sh
+  - ./tests/roles-test-shim/ansible-role-test.sh
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

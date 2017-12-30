@@ -1,5 +1,11 @@
 ---
-
+- name: "Install crate requirements packages."
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ crate_packages }}"
+    
 - name: "Add GPG key from cratedb"
   rpm_key:
     state: present

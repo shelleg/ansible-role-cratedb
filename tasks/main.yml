@@ -26,15 +26,9 @@
     - /opt/crate/data
     - /opt/crate/data/crate
 
-- name: "Install crate requirements packages."
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "{{ crate_packages }}"
 
 - name: "Inlcude OS-specific tasks"
-  include: "setup-{{ ansible_os_family }}.yml"
+  include_tasks: "setup-{{ ansible_os_family }}.yml"
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
 
 - name: "Install crate packages."
@@ -65,7 +59,8 @@
     host: "{{ cratedb_listen_address }}"
     port: "{{ cratedb_listen_port }}"
     delay: 10
+  register: service_up
 
 - name: "prometheus init db - when cratedb_prom_init"
-  include: "prometheus-initdb.yml"
-  when: cratedb_adapter_prometheus_init
+  include_tasks: "prometheus-initdb.yml"
+  when: cratedb_adapter_prometheus_init and service_up

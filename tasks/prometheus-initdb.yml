@@ -15,3 +15,4 @@
           "valueRaw" LONG,
           PRIMARY KEY ("timestamp", "labels_hash")
           );'
+  changed_when: false
