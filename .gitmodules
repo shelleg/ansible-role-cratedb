@@ -1,3 +1,0 @@
-[submodule "tests/roles-test-shim"]
-	path = tests/roles-test-shim
-	url = https://gist.github.com/b8deb536e6129876691138f83f1c3e28.git
