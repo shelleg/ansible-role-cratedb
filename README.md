@@ -30,7 +30,10 @@ None !
 
 Testing this Role
 -----------------
-Until we have something more flexible like travis integration use the `Vagrantfile` + `servers.yml` under the `test` folder:
+
+travis-ci should be active using ansible-test-shim with docker see the `.travis.yml` at the root of this directory + the `tests` directory.
+
+In addition for more complex testing you can use the `Vagrantfile` + `servers.yml` under the `test` folder:
 
 The `servers.yml` alongside `Vagrantfile` allows to control
 
@@ -78,15 +81,13 @@ Including an example of how to use your role (for instance, with variables passe
 Once Ansible run is complete:
 -----------------------------
 
-Get Crate's admin UI vi http://{{ ansible_hostname }}:4200/admin in your browser.
-
-![CrateDBb Dashbaord](https://photos-4.dropbox.com/t/2/AACZVtmAuBgahfqmzUzFg41Xh_-bMppsu0Ibo3G44t0gsg/12/124337709/png/32x32/3/1507993200/0/2/cratedb-dashboard-metrics.png/EObR318YHSAHKAc/MP0zGFpydlVC71wUI2hHOuibVo-4UZGrl-jQ_2VpFqs?dl=0&size=2048x1536&size_mode=3 "CreateDB dashbaord")
+Get Crate's admin UI vi `http://{{ ansible_hostname }}:4200/admin` in your browser.
 
 
 License
 -------
 
-[Apache 2](https://choosealicense.com/licenses/apache-2.0/)
+[![GitHub license](https://img.shields.io/github/license/shelleg/ansible-role-cratedb.svg?style=plastic)](https://github.com/shelleg/ansible-role-cratedb/blob/master/LICENSE)
 
 
 Author Information
