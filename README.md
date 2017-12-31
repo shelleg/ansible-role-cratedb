@@ -1,5 +1,6 @@
 ![picture alt](https://res.cloudinary.com/siftery/image/upload/v1443450475/v1/p/products/crateio.png?imageView/2/w/100/h/100/q/80/format/png "CreateDB") CrateDB Role
 ============
+[![Build Status](https://travis-ci.org/shelleg/ansible-role-cratedb.svg?branch=master)](https://travis-ci.org/shelleg/ansible-role-cratedb)
 
 A naive (ATM) role to install a single CrateDB instance for purposes of serving as a prometheus long-term storage solution.
 In addition should support [prometheus / cratedb_adapter](https://github.com/crate/crate_adapter) (still WIP) - This moved to [shelleg.prometheus](https://github.com/shelleg/ansible-role-prometheus)
